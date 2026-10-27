@@ -1,4 +1,4 @@
-"""Optional: copy the built staging + marts tables from DuckDB into a MySQL/MariaDB database.
+"""Optional: copy the built staging, marts and forecast tables from DuckDB into a MySQL/MariaDB database.
 
 DuckDB stays the source of truth; this is for exploring the results in MySQL Workbench.
 Connection settings come from .env (see .env.example). The database is created if missing,
@@ -14,6 +14,8 @@ from dotenv import load_dotenv
 
 from grid_pulse.ingest import DB_PATH, ROOT
 from grid_pulse.transform import LAYERS
+
+EXPORT_SCHEMAS = [*LAYERS, "forecast"]
 
 
 def mysql_dsn(database: str) -> str:
@@ -49,7 +51,7 @@ def main() -> None:
         tables = con.execute(
             "SELECT schema_name, table_name FROM duckdb_tables() WHERE database_name = 'grid' "
             "AND schema_name IN (SELECT unnest(?)) ORDER BY schema_name, table_name",
-            [LAYERS],
+            [EXPORT_SCHEMAS],
         ).fetchall()
         for schema, table in tables:
             con.execute(f"DROP TABLE IF EXISTS my.{table}")

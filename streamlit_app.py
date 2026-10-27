@@ -11,4 +11,5 @@ st.set_page_config(page_title="grid-pulse", page_icon="⚡", layout="wide")
 st.navigation([
     st.Page("app_pages/power_mix.py", title="Power mix", icon="⚡", default=True),
     st.Page("app_pages/world.py", title="SA vs. the world", icon="🌍"),
+    st.Page("app_pages/forecast.py", title="Forecast", icon="📈"),
 ]).run()
