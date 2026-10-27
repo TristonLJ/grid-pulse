@@ -5,6 +5,19 @@ a peer comparison across 14 countries and regions, a CO₂ counterfactual, a bac
 
 **Status:** Ember analysis complete (data through Aug 2026). Eskom hourly data has been requested for the next phase.
 
+## Why I built this
+
+South Africa's electricity crisis is one of the country's biggest economic problems: years of load-shedding,
+and a grid that still runs mostly on coal. I wanted a portfolio project that tackles a real problem end to end,
+the way an analyst would at work:
+
+- **Start from a question, not a dataset:** *how fast is South Africa getting off coal, and is that fast enough?*
+- **Own the whole pipeline:** pull data from an API, model it in SQL, validate it, analyse it, forecast it and present it.
+- **Be honest about uncertainty:** ranges instead of single numbers, a simple baseline for every model, and limitations stated up front.
+
+It's also a learning project. I used it to practise SQL data modelling, data-quality testing, backtesting and
+dashboard design, and it builds on related work I've done in the energy space.
+
 ---
 
 ## TL;DR
