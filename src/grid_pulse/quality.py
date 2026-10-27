@@ -30,6 +30,27 @@ CHECKS = {
         select month from marts.fct_power_mix_monthly
         qualify month <> lag(month) over (order by month) + interval 1 month
     """,
+    "yearly: one row per entity per year per fuel": """
+        select entity, year, fuel from staging.stg_generation_yearly
+        group by all having count(*) > 1
+    """,
+    "yearly: fuels sum to Ember's reported total": f"""
+        select r.entity, r.date
+        from raw.ember_generation_yearly r
+        join marts.fct_peer_transition_yearly m on m.entity = r.entity and m.year = cast(r.date as integer)
+        where r.series = 'Total generation'
+          and abs(r.generation_twh - m.generation_twh) > {TOLERANCE_TWH}
+    """,
+    "yearly: every entity covers every year": """
+        select entity from marts.fct_peer_transition_yearly
+        group by entity
+        having count(distinct year) < (select count(distinct year) from marts.fct_peer_transition_yearly)
+    """,
+    # Coal plants emit roughly 0.8-1.2 kg CO2/kWh; far outside that means a unit or join bug
+    "co2: coal emission rate is physically plausible": """
+        select year from marts.fct_co2_avoided_yearly
+        where coal_mt_per_twh not between 0.6 and 1.3
+    """,
 }
 
 

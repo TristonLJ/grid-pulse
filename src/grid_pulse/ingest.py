@@ -6,6 +6,7 @@ Usage:  python -m grid_pulse.ingest
 """
 
 import json
+from functools import partial
 from pathlib import Path
 
 import duckdb
@@ -16,6 +17,10 @@ from grid_pulse import ember
 ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = ROOT / "data" / "raw" / "ember"
 DB_PATH = ROOT / "data" / "grid.duckdb"
+
+# Peers for the international comparison: sunny, coal-heavy or emerging economies like SA's
+PEER_CODES = ["ZAF", "CHL", "BRA", "MAR", "EGY", "KEN", "IND", "VNM", "IDN", "AUS", "MEX", "TUR"]
+BENCHMARKS = ["World", "Africa"]
 
 
 def load_json(con: duckdb.DuckDBPyConnection, table: str, path: Path) -> int:
@@ -28,9 +33,13 @@ def main() -> None:
     load_dotenv(ROOT / ".env")
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
+    peers = partial(ember.yearly, codes=PEER_CODES, regions=BENCHMARKS)
     fetches = {
         "ember_generation_monthly": ember.generation_monthly,
         "ember_demand_monthly": ember.demand_monthly,
+        "ember_generation_yearly": partial(peers, "electricity-generation"),
+        "ember_emissions_yearly": partial(peers, "power-sector-emissions"),
+        "ember_carbon_intensity_yearly": partial(peers, "carbon-intensity"),
     }
 
     with duckdb.connect(str(DB_PATH)) as con:

@@ -25,7 +25,9 @@ pytest
 ```
 
 **Dashboard:** `streamlit run streamlit_app.py` opens an interactive dashboard at http://localhost:8501.
-It has a year filter, KPIs, an animated replay of the power mix month by month, and hover tooltips on every chart.
+It has two pages:
+- **Power mix:** a year filter, KPIs, an animated month-by-month replay and hover tooltips on every chart.
+- **SA vs. the world:** an animated race chart of wind + solar share across 14 countries and regions, grid carbon intensity, and how much CO₂ SA's wind and solar avoided.
 
 **Optional: explore in MySQL.** DuckDB (`data/grid.duckdb`) is the project's database and needs no server.
 To browse the results in MySQL Workbench, set the `MYSQL_*` values in `.env` and run
@@ -35,6 +37,8 @@ To browse the results in MySQL Workbench, set the `MYSQL_*` values in `.env` and
 
 - [x] Project setup
 - [x] Ember ingestion → DuckDB
+- [x] Peer comparison: SA vs. 11 countries + World/Africa, 2000–2025
+- [x] CO₂-avoided estimate with high/low assumptions
 - [ ] Eskom hourly CSV loader
 - [x] Clean / tidy SQL models + data-quality tests
 - [x] Notebook 01: power mix 2018–2025
@@ -50,6 +54,12 @@ From [notebook 01](notebooks/01_power_mix.ipynb) (Ember monthly data, full years
 1. **Coal is losing share steadily, but slowly:** from 90.9% of generation in 2018 to 80.3% in 2025.
 2. **Solar is the growth story:** utility-scale solar went up 4.3x (4.3 → 18.6 TWh); wind + solar now provide ≈13% of generation.
 3. **2023 was the low point:** domestic generation fell 12% from 2018, then partly recovered in 2024.
+
+### South Africa vs. the world (Ember yearly data, 2025)
+
+4. **SA is falling behind its peers.** Wind + solar provide 12.7% of SA's generation. That ranks 9th of 12 peer countries and is 4.6 points below the world average (17.3%). Chile (38%), Australia (34%), Brazil (27%), Kenya and Morocco (21%) are all well ahead.
+5. **SA has one of the dirtiest grids in the group:** 699 g CO₂/kWh, 1.5x the world average (460). Only Indonesia's is higher.
+6. **Even so, wind and solar are already paying off:** they avoided an estimated **21.5–26.0 Mt CO₂ in 2025**, about what 4.7–5.7 million cars emit in a year, and **137–158 Mt since 2000**. The range comes from two assumptions about what wind and solar replaced: average grid power (low) or coal power (high). The method is documented in [`sql/marts/fct_co2_avoided_yearly.sql`](sql/marts/fct_co2_avoided_yearly.sql).
 
 ![Coal share](reports/figures/01_coal_share.png)
 ![Wind and solar](reports/figures/02_wind_solar.png)
