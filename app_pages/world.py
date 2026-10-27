@@ -150,8 +150,8 @@ with st.expander("Method and caveats"):
 - **What we estimate:** the CO₂ that would have been emitted if the electricity from wind and solar
   had come from other plants instead.
 - **High estimate:** it would all have come from **coal**, at that year's average coal emission rate
-  (coal CO₂ ÷ coal TWh, about {c['coal_mt_per_twh']:.2f} kg/kWh). This is a fair upper bound for SA, where the plant
-  that adjusts to meet demand is almost always coal.
+  (coal CO₂ ÷ coal TWh, about {c['coal_mt_per_twh']:.2f} kg/kWh). This is a reasonable upper bound for SA, where coal
+  supplies most of the power that wind and solar could displace.
 - **Low estimate:** it would have come from the **average grid mix** at that year's carbon intensity.
 - **Not modelled:** the fact that wind and solar output varies (backup plants may run less efficiently),
   and how Ember counts rooftop solar. Each step from one assumption to the next is shown in

@@ -2,7 +2,8 @@
 --
 -- Counterfactual: without wind and solar, the same electricity would have come from
 -- other plants. We bracket the answer with two assumptions:
---   high: it would all have come from coal (SA's marginal plant is almost always coal),
+--   high: it would all have come from coal (coal supplies most of the power that SA's wind
+--         and solar could displace),
 --         at that year's coal emissions rate (coal Mt CO2 / coal TWh)
 --   low:  it would have come from the average grid mix, at the grid's carbon intensity
 -- Units: Mt CO2 per TWh is numerically the same as kg CO2 per kWh; g/kWh / 1000 = Mt/TWh.

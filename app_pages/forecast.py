@@ -162,6 +162,9 @@ with st.expander("Method and caveats"):
 - **Ranges** are the 10th–90th and 2.5th–97.5th percentiles of the chosen model's backtest errors at each horizon.
   With about 45–56 scored forecasts per horizon, the 95% band is approximate. The same backtest chose the model
   and set the ranges, which makes them slightly optimistic.
+- **Two datasets:** the 12-month forecast uses Ember's *monthly* data, while the 70% scenario needs history back
+  to 2010, so it uses Ember's *yearly* data. The yearly dataset puts SA's coal output up to about 12 TWh (≈6%) higher
+  since 2022, so the scenario starts about 1 point higher than the monthly series.
 - **The 70% scenario** is a straight-line extension, not a forecast. Policy (new renewables auctions, coal plant
   retirements, private solar) can bend the curve either way.
 - Code: `src/grid_pulse/forecast.py`, pure numpy, with tests in `tests/test_forecast.py`.
