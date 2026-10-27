@@ -8,6 +8,8 @@ dependencies = [
     "requests>=2.32",
     "python-dotenv>=1.0",
     "matplotlib>=3.9",
+    "streamlit>=1.50",
+    "altair>=5.4",
     "jupyterlab>=4.2",
 ]
 

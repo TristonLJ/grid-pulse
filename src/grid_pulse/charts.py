@@ -16,6 +16,7 @@ TEXT = "#0b0b0b"
 TEXT_SECONDARY = "#52514e"
 GRID = "#e4e3df"
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a"]  # blue, orange, aqua
+SERIES_DARK = ["#3987e5", "#d95926", "#199e70"]  # same hues, stepped for dark surfaces
 
 
 def apply_style() -> None:

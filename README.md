@@ -24,6 +24,9 @@ python -m grid_pulse.transform   # raw -> staging -> marts, then data-quality ch
 pytest
 ```
 
+**Dashboard:** `streamlit run streamlit_app.py` opens an interactive dashboard at http://localhost:8501.
+It has a year filter, KPIs, an animated replay of the power mix month by month, and hover tooltips on every chart.
+
 **Optional: explore in MySQL.** DuckDB (`data/grid.duckdb`) is the project's database and needs no server.
 To browse the results in MySQL Workbench, set the `MYSQL_*` values in `.env` and run
 `python -m grid_pulse.export_mysql`. That copies the staging and mart tables into a `grid_pulse` database.
@@ -37,7 +40,7 @@ To browse the results in MySQL Workbench, set the `MYSQL_*` values in `.env` and
 - [x] Notebook 01: power mix 2018–2025
 - [ ] Notebook 02: Eskom hourly demand vs. capacity, outages
 - [ ] Demand forecasting (baseline vs. gradient boosting, backtested)
-- [ ] Streamlit dashboard
+- [x] Streamlit dashboard with animated month-by-month replay
 - [ ] GitHub Actions scheduled refresh
 
 ## Key findings so far
