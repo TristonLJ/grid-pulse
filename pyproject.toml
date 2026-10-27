@@ -7,7 +7,7 @@ dependencies = [
     "duckdb>=1.0",
     "requests>=2.32",
     "python-dotenv>=1.0",
-    "plotly>=5.22",
+    "matplotlib>=3.9",
     "jupyterlab>=4.2",
 ]
 
