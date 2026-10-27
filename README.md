@@ -24,6 +24,10 @@ python -m grid_pulse.transform   # raw -> staging -> marts, then data-quality ch
 pytest
 ```
 
+**Optional: explore in MySQL.** DuckDB (`data/grid.duckdb`) is the project's database and needs no server.
+To browse the results in MySQL Workbench, set the `MYSQL_*` values in `.env` and run
+`python -m grid_pulse.export_mysql`. That copies the staging and mart tables into a `grid_pulse` database.
+
 ## Roadmap
 
 - [x] Project setup
